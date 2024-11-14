@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router,Routes, Route, Switch } from "react-router-dom";
+import Home from "./Components/Home";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
+import CarList from "./Components/CarList";
+import CarDetail from "./Components/CarDetails";
+import CarForm from "./Components/CarForm";
+import UpdateCarPage from "./Components/CarUpdate";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+      <Route path="/" element={<Home/>} />
+        <Route path="/signup" element={<Register/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/cars" exact element={<CarList/>} />
+        <Route path="/cars/:id" element={<CarDetail/>} />
+        <Route path="/cars/update/:id" element={<UpdateCarPage/>}/>
+        <Route
+          path="/create-car"
+          element={<CarForm/>}
+        />
+        <Route
+          path="/edit-car/:id"
+          element={() => <CarForm car={{}} onSubmit={() => {}} />}
+        />
+      </Routes>
+    </Router>
+    
   );
-}
+};
 
 export default App;
